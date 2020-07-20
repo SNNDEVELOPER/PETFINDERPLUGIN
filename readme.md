@@ -22,7 +22,7 @@ Petfinder has transitioned away from their v1 API to a v2 API that uses OAUTH. T
         });
     </script>
 
-6. Add <link rel="stylesheet" href="petfinderplugin.css"> the head of your webpage adn adjust your path if necessary:
+6. Add <link rel="stylesheet" href="petfinderplugin.css"> the head of your webpage and adjust your path if necessary. See plugintest.html for an example.
 
 # AUTHOR 
 
