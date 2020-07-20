@@ -10,7 +10,7 @@ Petfinder has transitioned away from their v1 API to a v2 API that uses OAUTH. T
 
 3. Add <script src="petfinderplugin.js"></script> to your webpage and adjust your path if necessary
 
-4. Add a <div id="data"></div> to your webpage. You can use any ID name you choose, ensure you update the id when you initialize the plugin below.
+4. Add an ID to a dom element to your webpage. You can use any ID name you choose, ensure you update the id name when you initialize the plugin.
 
 5. Initizlize the plugin on your webpage with the following:
     <script>
@@ -22,7 +22,7 @@ Petfinder has transitioned away from their v1 API to a v2 API that uses OAUTH. T
         });
     </script>
 
-6. Add <link rel="stylesheet" href="petfinderplugin.css"> the head of your webpage adn adjust your path if necessary:
+6. Add <link rel="stylesheet" href="petfinderplugin.css"> the head of your webpage and adjust your path if necessary. See plugintest.html for an example.
 
 # AUTHOR 
 
