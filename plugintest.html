@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+ <html class="no-js">  
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EXAMPLE TEST PAGE FOR PETFINDER PLUGIN</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="petfinderplugin.css">
+    </head>
+    <body>
+        <div id="data"></div>
+        <script src="petfinderplugin.js"></script>
+        <script>
+            Petfinderplugin.init({
+                shelterid: "", // YOUR SHELTER ID
+                petdisplay: 0, // 1 = one, 0 = all
+                url: "getpets.php", // PATH TO GETPETS FILE
+                id: "data" // ID TO APPEND DATA TO
+            });
+        </script>
+    </body>
+</html>

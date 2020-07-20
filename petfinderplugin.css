@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Patua+One');
+
+.petCard {
+	background: #ffffff;
+    margin-bottom: 2em;	
+    color: #404040;
+    font-family: 'Comfortaa',Arial,sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.petCard p {
+    margin:0;
+    padding: 0;
+}
+
+.petCard a {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #67AAF9;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.petCard a:hover {
+	box-shadow: 3px 3px 8px hsl(0, 0%, 80%);
+}
+
+.petCard-content {
+	padding: 1.4em;
+}
+
+.petCard h1, .petCard-content h1 {
+	margin-top: 0;
+	margin-bottom: .5em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #67AAF9;
+}
+
+.petCard-content p {
+	font-size: 80%;
+}
+
+.petCard img {
+    padding-top: 25px;
+}
+/* FLEXBOX */
+
+.petCards {
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+.petCard {
+    flex: 1 0 300px;
+    box-sizing: border-box;
+    margin: 1rem .25em;
+}
+
+@media screen and (min-width: 40em) {
+    .petCard {
+       max-width: calc(50% -  1em);
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .petCard {
+        max-width: calc(25% - 1em);
+    }
+}
+
+.centered {
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+@media screen and (min-width: 52em) {
+    .centered {
+        max-width: 52em;
+    }
+}
