@@ -94,21 +94,6 @@ let Petfinderplugin = (function(window, document) {
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
         return trimmedString;
     }
-
-    //-------------------------------------------------------------------------------------//
-    // GET CLOSEST SELECTOR FROM ELEMENT CLICKED ------------------------------------------//
-    //-------------------------------------------------------------------------------------//
-    
-     let getClosest = function (elem, selector) {
-        for ( ; elem && elem !== document; elem = elem.parentNode ) {
-            if ( elem.matches( selector ) ) return elem;
-        }
-        return null;
-    };
-    
-    //-------------------------------------------------------------------------------------//
-    // END PRIVATE METHODS ----------------------------------------------------------------//
-    //-------------------------------------------------------------------------------------//
     
     return new Plugin();
     
