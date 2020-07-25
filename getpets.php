@@ -83,6 +83,8 @@
 
     $cached_pets_file_name = 'cached-pets.txt';
     $cached_pets = get_content($cached_pets_file_name,3,'writeFile',array('file'=>$cached_pets_file_name));
+    //header("Access-Control-Allow-Origin: *"); CORS OPTION IF NEEDED
+
     $json = json_encode($cached_pets);
     printf($cached_pets);
 
