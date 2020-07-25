@@ -1,12 +1,12 @@
-let Petfinderplugin = (function(window, document) {
+let Petfinderplugin = (function (window, document) {
 
     let Plugin = {};
-    
+
     //-------------------------------------------------------------------------------------//
     // CONSTRUCTOR ------------------------------------------------------------------------//
     //-------------------------------------------------------------------------------------//
-    
-    Plugin = (function() {
+
+    Plugin = (function () {
         function Plugin() {
             let _ = this;
             _.defaults = {
@@ -15,49 +15,51 @@ let Petfinderplugin = (function(window, document) {
         }
         return Plugin;
     }());
-    
+
     //-------------------------------------------------------------------------------------//
     // PUBLIC METHODS ---------------------------------------------------------------------//
     //-------------------------------------------------------------------------------------//
-    
-    Plugin.prototype.init = function(settings) {
+
+    Plugin.prototype.init = function (settings) {
         let _ = this;
-        _.options = _._extend(_.defaults,settings);
+        _.options = _._extend(_.defaults, settings);
         _._getData();
         return _;
     }
-    
+
     //-------------------------------------------------------------------------------------//
     // PRIVATE METHODS --------------------------------------------------------------------//
     //-------------------------------------------------------------------------------------//
-    let getId = function(id) { return document.getElementById( id ) }
+    let getId = function (id) {
+        return document.getElementById(id)
+    }
     let currentPage = window.location.pathname.split("/").pop();
 
     // UTILITY FUNCTION TO EXTEND OPTIONS
-    Plugin.prototype._extend = function(source, obj) {
-        Object.keys(obj).forEach(function(key) {
-          source[key] = obj[key];
+    Plugin.prototype._extend = function (source, obj) {
+        Object.keys(obj).forEach(function (key) {
+            source[key] = obj[key];
         });
         return source;
     };
-    
-    Plugin.prototype._getData = function() {
+
+    Plugin.prototype._getData = function () {
         let _ = this; // _.options.url
         let display = getId(_.options.id);
-        fetch('pets.php')
-        .then(function (response) {
-            response.status = 200 ? display.innerHTML = "Loading..." : '';
-            return response.json();
-        }).then(function (data) {
-            _._listPets(data);
-        })
-        .catch(function (err) {
-            console.log("Something went wrong with the request!", err);
-            display.innerHTML = `We've experienced a technical problem. For our available adoptions please <a href="https://www.petfinder.com/search/pets-for-adoption/?shelter_id=${_.options.shelterid}">visit our Petfinder page</a>.`;
-        });
+        fetch(_.options.url)
+            .then(function (response) {
+                response.status = 200 ? display.innerHTML = "Loading..." : '';
+                return response.json();
+            }).then(function (data) {
+                _._listPets(data);
+            })
+            .catch(function (err) {
+                console.log("Something went wrong with the request!", err);
+                display.innerHTML = `We've experienced a technical problem. For our available adoptions please <a href="https://www.petfinder.com/search/pets-for-adoption/?shelter_id=${_.options.shelterid}">visit our Petfinder page</a>.`;
+            });
     }
 
-    Plugin.prototype._listPets = function(data) {
+    Plugin.prototype._listPets = function (data) {
         let _ = this;
         let display = getId(_.options.id);
         display.innerHTML = "";
@@ -66,16 +68,16 @@ let Petfinderplugin = (function(window, document) {
         let details = ``;
         let petContainer = `<div class="petCards">`;
         // NO ADOPTIONS
-        if(Object.keys(pet).length === 0 && pet.constructor === Object) {
+        if (Object.keys(pet).length === 0 && pet.constructor === Object) {
             details += `<div>No adoptions are available currently</div>`
-        } 
-        // SHOW ONE RANDOM PET - WILL BE BUILT UNDER LIST ALL PETS
-        if(_.options.petdisplay === 1) {
-            pet = [pet[Math.floor(Math.random()*pet.length)]];
         }
-        
+        // SHOW ONE RANDOM PET - WILL BE BUILT UNDER LIST ALL PETS
+        if (_.options.petdisplay === 1 && !parseInt(getUrlParameter("petID"))) {
+            pet = [pet[Math.floor(Math.random() * pet.length)]];
+        }
+
         // PET DETAILS PAGE
-        if(getUrlParameter("petID")) {
+        if (getUrlParameter("petID")) {
             pet = [pet.find(el => el.id === parseInt(getUrlParameter("petID")))];
             for (let i = 0; i < pet.length; i++) {
                 details += ` 
@@ -93,9 +95,9 @@ let Petfinderplugin = (function(window, document) {
                                             
                                             <div class="petButtons">
                                                 <p><a href="${pet[i].url}">Adopt ${pet[i].name}</a></p>
-                                                <p><a href="plugintest.html">See more pets</a></p>
+                                                <p> <a href = "${window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1).replace(/[\#\?].*$/,'') }">See more pets</a></p >
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>
@@ -121,7 +123,7 @@ let Petfinderplugin = (function(window, document) {
             }
         } else {
             // LIST ALL PETS
-            for(let i = 0; i < pet.length; i++) {
+            for (let i = 0; i < pet.length; i++) {
                 details += `<div class="petCard">
                     <h1>${pet[i].name}</h1>
                     <p>${pet[i].age} - ${pet[i].size} - ${pet[i].breeds.primary} - ${pet[i].gender}</p>
@@ -136,7 +138,7 @@ let Petfinderplugin = (function(window, document) {
             }
 
         }
-         
+
         display.innerHTML = petContainer += details;
 
         // CLICK HANDLER FOR THUMBNAILS
@@ -144,7 +146,7 @@ let Petfinderplugin = (function(window, document) {
 
     }
 
-    Plugin.prototype._stringLength = function(yourString, maxLength) { 
+    Plugin.prototype._stringLength = function (yourString, maxLength) {
         let trimmedString = yourString.substr(0, maxLength);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
         return trimmedString;
@@ -153,10 +155,10 @@ let Petfinderplugin = (function(window, document) {
     //-------------------------------------------------------------------------------------//
     // HELPER FUNCTIONS -------------------------------------------------------------------//
     //-------------------------------------------------------------------------------------//
-    
+
     getClosest = (elem, selector) => {
-        for ( ; elem && elem !== document; elem = elem.parentNode ) {
-            if ( elem.matches( selector ) ) return elem;
+        for (; elem && elem !== document; elem = elem.parentNode) {
+            if (elem.matches(selector)) return elem;
         }
         return null;
     };
@@ -172,10 +174,10 @@ let Petfinderplugin = (function(window, document) {
         let page = window.location.pathname.split("/").pop();
         return page;
     }
-    
+
     buildThumbnails = (photos) => {
         let thumbnails = ``;
-        for(let i = 0; i < photos.length; i++) {
+        for (let i = 0; i < photos.length; i++) {
             thumbnails += `<div class="thumbs">
                             <img src="${photos[i].small}" class="petThumbnail" data-fullsize="${photos[i].medium}">
                            </div>`
@@ -186,22 +188,24 @@ let Petfinderplugin = (function(window, document) {
     clickEvents = () => {
         let imgs = document.getElementsByClassName("petThumbnail");
         let petMainImage = document.getElementById("petMainImage")
-         for (let j = 0; j < imgs.length; j++) {
-             imgs[j].onclick = function (e) {
-                 petMainImage.src = e.target.dataset.fullsize
-             }
-         }
+        for (let j = 0; j < imgs.length; j++) {
+            imgs[j].onclick = function (e) {
+                petMainImage.src = e.target.dataset.fullsize
+            }
+        }
     }
 
     return new Plugin();
-    
+
 })(window, document);
-    
-(function() {
+
+(function () {
     'use strict';
-    if(typeof define === 'function' && define.amd) {
-        define('Petfinderplugin', function () { return Petfinderplugin; });
-    } else if(typeof module !== 'undefined' && module.exports) {
+    if (typeof define === 'function' && define.amd) {
+        define('Petfinderplugin', function () {
+            return Petfinderplugin;
+        });
+    } else if (typeof module !== 'undefined' && module.exports) {
         module.exports = Petfinderplugin;
     } else {
         window.Petfinderplugin = Petfinderplugin;
