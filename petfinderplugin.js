@@ -64,6 +64,7 @@ let Petfinderplugin = (function (window, document) {
         let display = getId(_.options.id);
         display.innerHTML = "";
         let d = data;
+        d = JSON.parse(JSON.stringify(d).replace(/\:null/gi, "\:\"\"")); 
         let pet = d.animals;
         let details = ``;
         let petContainer = `<div class="petCards">`;
