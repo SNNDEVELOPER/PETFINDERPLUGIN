@@ -128,7 +128,7 @@ let Petfinderplugin = (function (window, document) {
                 details += `<div class="petCard">
                     <h1>${pet[i].name}</h1>
                     <p>${pet[i].age} - ${pet[i].size} - ${pet[i].breeds.primary} - ${pet[i].gender}</p>
-                    <p><img src="${pet[i].photos[0].small}"></p>
+                    <img src="${pet[i].photos[0].small}">
                     <div class="petCard-content">
                         <p>${_._stringLength(pet[i].description, 100)} ...</p>
                     </div>
