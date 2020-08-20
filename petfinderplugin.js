@@ -147,9 +147,10 @@ let Petfinderplugin = (function (window, document) {
 
     }
 
-    Plugin.prototype._stringLength = function (yourString, maxLength) {
+    Plugin.prototype._stringLength = function(yourString, maxLength) { 
         let trimmedString = yourString.substr(0, maxLength);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+        trimmedString.length > 0 ? trimmedString = trimmedString + " ..." : trimmedString;
         return trimmedString;
     }
 
