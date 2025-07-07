@@ -65,6 +65,11 @@
     border: 1px solid #cecece;
 }
 
+.petMainImage img {
+    margin: 0;
+    max-width: 100%;
+}
+
 .petCard-content {
 	padding: 1.4em;
 }
